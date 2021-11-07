@@ -4,7 +4,7 @@ let video;
 let label = "waiting...";
 // The classifier
 let classifier;
-let modelURL = "https://teachablemachine.withgoogle.com/models/0tZG0WLV/";
+let modelURL = "https://teachablemachine.withgoogle.com/models/GYW9Xuob/";
 
 // STEP 1: Load the model!
 function preload() {
@@ -40,6 +40,11 @@ function gotResults(error, results) {
     console.error(error);
     return;
   }
+  console.log(label);
   // Store the label and classify again!
   label = results[0].label;
+  confidence = results[0].confidence.toFixed(2);
+  if (confidence < 0.6) {
+    label = "Standby";
+  }
 }
